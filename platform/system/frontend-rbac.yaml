@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: frontend
+  namespace: argocd
+spec:
+  description: Frontend project for managing applications
+  sourceRepos:
+    - git@github.com:ZFlucKZ/nonprod-k8s-manifest-2.git
+  destinations:
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+
+  roles:
+    - name: Backend Read-Only
+      description: Role for read-only access to backend applications
+      policies:
+        - p, proj:backend:read-only, applications, get, backend/*, allow
+
+    - name: Frontend Read-Write
+      description: Role for read-write access to frontend applications
+      policies:
+        - p, proj:frontend:read-write, applications, get, frontend/*, allow
+        - p, proj:frontend:read-write, applications, sync, frontend/*, allow
+        - p, proj:frontend:read-write, applications, update, frontend/*, allow

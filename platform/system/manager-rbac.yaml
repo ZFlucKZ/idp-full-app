@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: manager
+  namespace: argocd
+spec:
+  description: Manager project for managing applications
+  sourceRepos:
+    - git@github.com:ZFlucKZ/idp-full-app.git
+    - git@github.com:ZFlucKZ/nextjs-app.git
+    - git@github.com:ZFlucKZ/nestjs-api.git
+    - git@github.com:ZFlucKZ/nonprod-k8s-manifest-2.git
+    - git@github.com:ZFlucKZ/nonprod-k8s-config-2.git
+  destinations:
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+
+  roles:
+    - name: Application Manager
+      description: Role for managing applications
+      policies:
+        - p, applications:manager:all, applications, *, */*, allow
+
+    - name: Project Manager
+      description: Role for managing projects
+      policies:
+        - p, proj:manager:get, projects, get, *, allow

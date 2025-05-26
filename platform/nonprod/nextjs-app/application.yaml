@@ -4,7 +4,7 @@ metadata:
   name: nextjs-app-dev
   namespace: argocd
 spec:
-  project: default
+  project: frontend
   source:
     repoURL: git@github.com:ZFlucKZ/nonprod-k8s-manifest-2.git
     targetRevision: main # branch

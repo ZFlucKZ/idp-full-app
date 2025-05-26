@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  policy.csv: |
+    g, backend, proj:backend:read-write
+    g, backend, proj:frontend:read-only
+
+    g, frontend, proj:frontend:read-write
+    g, frontend, proj:backend:read-only
+
+    g, manager, proj:manager:get
+    g, manager, applications:manager:all
+
+  policy.default: role:readonly
