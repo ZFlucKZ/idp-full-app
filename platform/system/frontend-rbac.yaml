@@ -17,12 +17,12 @@ spec:
       kind: Namespace
 
   roles:
-    - name: Backend Read-Only
-      description: Role for read-only access to backend applications
+    - name: Read-Only
+      description: Role for read-only access to frontend applications
       policies:
-        - p, proj:backend:read-only, applications, get, backend/*, allow
+        - p, proj:frontend:read-only, applications, get, frontend/*, allow
 
-    - name: Frontend Read-Write
+    - name: Read-Write
       description: Role for read-write access to frontend applications
       policies:
         - p, proj:frontend:read-write, applications, get, frontend/*, allow
