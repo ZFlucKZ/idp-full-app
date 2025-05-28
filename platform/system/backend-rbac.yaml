@@ -8,6 +8,8 @@ spec:
   sourceRepos:
     - git@github.com:ZFlucKZ/nonprod-k8s-manifest-2.git
   destinations:
+    - namespace: develop
+      server: https://kubernetes.default.svc
     - namespace: argocd
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
